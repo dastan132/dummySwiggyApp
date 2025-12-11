@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+:root {
+  --window-bg: #fffaf0; /* soft amber */
+}
+
+body {
+  background-color: var(--window-bg);
+}
+
