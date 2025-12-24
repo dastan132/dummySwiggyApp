@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
-import {SWIG_API,IMG_API} from './Constants'
+import { useEffect, useState } from "react"
+import { SWIG_API,IMG_API } from "./Constants"
 
-const useResturentMenu = () => {
-     const [loading, setLoading] = useState(true)
-    const [CardInfo, setCardInfo] = useState([]);
-  
+
+const useFetchCard = () => {
+    const [loading, setLoading] = useState(true)
+    const [filteredCards, setFilteredCards] = useState([]);
+    const [resCards, setResCards] = useState([]);
     const [error, setError] = useState(null)
 
       useEffect(() => {
@@ -31,7 +32,8 @@ const useResturentMenu = () => {
           description: res?.info?.cuisines?.join(", "),
         }));
 
-        setCardInfo(formattedCards)
+        setResCards(formattedCards)
+        setFilteredCards(formattedCards)
         
 
             }catch(err){
@@ -46,13 +48,13 @@ const useResturentMenu = () => {
       },[])
     
     return{
-        
-        CardInfo,
-        setCardInfo,
+        resCards,
+        filteredCards,
+        setFilteredCards,
         loading,
         error,
-         }
-
+        
+    }
 }
 
-export default useResturentMenu;
+export default useFetchCard

@@ -1,22 +1,35 @@
-
-import ShimmerCard from "./ShimmerCard";
-import { IMG_API } from "../Utils/Constants";
 import useResturentMenu from "../Utils/useResturentMenu";
-import { useParams } from "react-router-dom";
+import ShimmerCard from "./ShimmerCard";
+import CardDetails from "./Card";
 
 const CardInfo = () => {
-  const {restId} = useParams();
-  const resInfo = useResturentMenu(restId)
-
-    if (!resInfo) {
-    return <ShimmerCard />;
-  }
-
-console.log("new: ",resInfo)
-
+  const {         CardInfo,
+         } = useResturentMenu();
 
   return (
-  <><h1></h1></>
+    <>
+
+          {CardInfo.length > 0 ? (
+            CardInfo.map((card) => (
+              <div
+                key={card.id}
+              
+              >
+                <CardDetails
+                  cardId={card.id}
+                  image={card.image}
+                  title={card.title}
+                  description={card.description}
+                  location={card.location}
+                  rating={card.rating}
+                />
+              </div>
+            ))
+          ) : (
+            <p >No cards found.</p>
+          )}
+
+    </>
   );
 };
 
